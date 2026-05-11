@@ -1,6 +1,9 @@
+const { autoLogin, isLoggedIn, getCurrentUser } = require('./utils/auth');
+
 App({
   globalData: {
     userInfo: null,
+    isLogin: false,
     restorationHistory: [],
     galleryData: [
       { id: 1, title: '1960s全家福', mode: 'colorize', date: '2025-04-12', image: '/images/gallery-1.jpg' },
@@ -12,9 +15,15 @@ App({
     ]
   },
 
-  onLaunch() {
+  async onLaunch() {
     console.log('拾光旧影 小程序启动')
     this.loadHistory()
+    
+    // 自动登录
+    const result = await autoLogin();
+    this.globalData.isLogin = result.is_login;
+    this.globalData.userInfo = result.user || null;
+    console.log('登录状态:', result.is_login ? '已登录' : '未登录');
   },
 
   loadHistory() {
@@ -28,5 +37,20 @@ App({
     if (history.length > 50) history.pop()
     this.globalData.restorationHistory = history
     wx.setStorageSync('restorationHistory', history)
+  },
+
+  // 更新登录状态
+  setLoginState(isLogin, userInfo) {
+    this.globalData.isLogin = isLogin;
+    this.globalData.userInfo = userInfo;
+  },
+
+  // 检查是否登录（未登录则跳转登录页）
+  checkLogin() {
+    if (!this.globalData.isLogin) {
+      wx.navigateTo({ url: '/pages/login/login' });
+      return false;
+    }
+    return true;
   }
 })

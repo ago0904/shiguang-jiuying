@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "照片修复",
-  "usingComponents": {
-    "upload-zone": "/components/upload-zone/upload-zone",
-    "mode-card": "/components/mode-card/mode-card",
-    "compare-slider": "/components/compare-slider/compare-slider",
-    "progress-ring": "/components/progress-ring/progress-ring"
-  }
-}

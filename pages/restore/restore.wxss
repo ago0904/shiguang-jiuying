@@ -1,0 +1,256 @@
+/* ===== 页面级样式 ===== */
+
+.restore-page {
+  min-height: 100vh;
+  padding-top: 32rpx;
+  padding-bottom: 64rpx;
+}
+
+/* 页面标题 */
+.page-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #2D2A26;
+  margin-bottom: 32rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: #6B6560;
+  margin-bottom: 32rpx;
+  margin-top: -16rpx;
+}
+
+/* 按钮禁用状态 */
+.btn-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ===== 状态1: 上传照片 ===== */
+
+.preview-section {
+  margin-top: 32rpx;
+}
+
+.preview-label {
+  display: block;
+  font-size: 26rpx;
+  color: #6B6560;
+  margin-bottom: 16rpx;
+}
+
+.preview-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 300rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  background: #FFF8EE;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-change-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64rpx;
+  background: rgba(45,42,38,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-change-text {
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+
+/* ===== 状态2: 选择模式 ===== */
+
+.mode-header {
+  margin-bottom: 16rpx;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.back-arrow {
+  font-size: 32rpx;
+  color: #6B6560;
+  margin-right: 8rpx;
+}
+
+.back-text {
+  font-size: 28rpx;
+  color: #6B6560;
+}
+
+.mode-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+  justify-content: space-between;
+}
+
+/* 已选模式标签 */
+.selected-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.selected-modes__label {
+  font-size: 24rpx;
+  color: #6B6560;
+}
+
+.selected-modes__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+/* ===== 状态3: 处理中 ===== */
+
+.processing-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(250,243,231,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.processing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.processing-status {
+  margin-top: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2D2A26;
+}
+
+/* 步骤进度条 */
+.step-progress {
+  display: flex;
+  align-items: center;
+  margin-top: 64rpx;
+  padding: 0 32rpx;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.step-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #C4A87C;
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.step-item--active .step-dot {
+  opacity: 1;
+  background: #C4A87C;
+}
+
+.step-item--done .step-dot {
+  opacity: 1;
+  background: #7A9E7E;
+}
+
+.step-text {
+  font-size: 20rpx;
+  color: #9C968F;
+  white-space: nowrap;
+}
+
+.step-item--active .step-text {
+  color: #2D2A26;
+  font-weight: 600;
+}
+
+.step-item--done .step-text {
+  color: #7A9E7E;
+  font-weight: 600;
+}
+
+.step-line {
+  width: 80rpx;
+  height: 2rpx;
+  background: #C4A87C;
+  opacity: 0.2;
+  margin: 0 12rpx;
+  margin-bottom: 28rpx;
+  transition: all 0.3s ease;
+}
+
+.step-line--active {
+  opacity: 1;
+}
+
+/* ===== 状态4: 对比结果 ===== */
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.result-info__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  justify-content: center;
+}
+
+.result-info__time {
+  font-size: 24rpx;
+  color: #9C968F;
+}
+
+.result-actions {
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.result-actions .btn-secondary,
+.result-actions .btn-primary {
+  flex: 1;
+  font-size: 26rpx;
+  padding: 22rpx 0;
+}
+
+.result-actions .btn-secondary {
+  flex: 0 0 auto;
+  padding: 22rpx 24rpx;
+}

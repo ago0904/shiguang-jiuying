@@ -1,0 +1,39 @@
+<view class="progress-ring-wrapper">
+  <!-- 脉冲光晕 -->
+  <view class="progress-ring__glow animate-pulse-glow"></view>
+
+  <view class="progress-ring">
+    <svg class="progress-ring__svg" viewBox="0 0 120 120">
+      <!-- 底层灰色轨迹圆环 -->
+      <circle
+        class="progress-ring__track"
+        cx="60"
+        cy="60"
+        r="54"
+        fill="none"
+        stroke="#C4A87C"
+        stroke-width="8"
+        stroke-linecap="round"
+      />
+      <!-- 上层进度圆环 -->
+      <circle
+        class="progress-ring__fill"
+        cx="60"
+        cy="60"
+        r="54"
+        fill="none"
+        stroke="#D4A35A"
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-dasharray="{{circumference}}"
+        stroke-dashoffset="{{dashOffset}}"
+        transform="rotate(-90 60 60)"
+      />
+    </svg>
+    <!-- 中心百分比文字 -->
+    <view class="progress-ring__text">
+      <text class="progress-ring__percent">{{progress}}</text>
+      <text class="progress-ring__unit">%</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+{
+  "platforms": {
+    "baidu": {
+      "enabled": true,
+      "app_key": "你的百度API Key",
+      "app_secret": "你的百度Secret Key"
+    },
+    "tencent": {
+      "enabled": false,
+      "secret_id": "你的腾讯云SecretId",
+      "secret_key": "你的腾讯云SecretKey"
+    },
+    "replicate": {
+      "enabled": false,
+      "api_token": "你的Replicate API Token",
+      "free_budget": 5.0
+    }
+  }
+}

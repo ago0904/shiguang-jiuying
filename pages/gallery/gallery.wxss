@@ -1,0 +1,118 @@
+/* 画廊页样式 */
+
+/* 页面标题区 */
+.gallery-header {
+  text-align: center;
+}
+
+.gallery-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #2D2A26;
+  display: block;
+}
+
+.gallery-subtitle {
+  font-size: 26rpx;
+  color: #6B6560;
+  display: block;
+}
+
+/* 筛选标签栏 */
+.filter-scroll {
+  white-space: nowrap;
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: row;
+  padding: 8rpx 0;
+}
+
+.filter-item {
+  display: inline-block;
+  padding: 14rpx 32rpx;
+  border-radius: 9999rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  margin-right: 16rpx;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filter-item:last-child {
+  margin-right: 0;
+}
+
+.filter-normal {
+  background-color: #FFF8EE;
+  color: #6B6560;
+  border: 2rpx solid transparent;
+}
+
+.filter-active {
+  background-color: #D4A35A;
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(212,163,90,0.35);
+}
+
+/* 画廊网格 - 瀑布流布局 */
+.gallery-grid {
+  column-count: 2;
+  column-gap: 24rpx;
+}
+
+/* 案例卡片 */
+.gallery-card {
+  break-inside: avoid;
+  margin-bottom: 24rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  background-color: #FFF8EE;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+}
+
+.gallery-card:active {
+  transform: scale(0.98);
+}
+
+.gallery-image {
+  width: 100%;
+  display: block;
+}
+
+/* 卡片信息区 */
+.gallery-info {
+  padding: 20rpx;
+  background-color: #FFF8EE;
+}
+
+.gallery-item-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #2D2A26;
+  display: block;
+  line-height: 1.4;
+}
+
+.gallery-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+
+.gallery-date {
+  font-size: 20rpx;
+  color: #9C968F;
+}
+
+/* 底部提示 */
+.gallery-footer {
+  text-align: center;
+  padding: 48rpx 0;
+  font-size: 24rpx;
+  color: #9C968F;
+}

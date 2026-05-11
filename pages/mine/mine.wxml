@@ -1,0 +1,92 @@
+<!-- 我的页 -->
+<view class="container py-32">
+
+  <!-- 用户信息区 -->
+  <view class="user-card animate-fade-in-up">
+    <view class="user-avatar-wrapper">
+      <view class="user-avatar">👤</view>
+    </view>
+    <text class="user-name">亲爱的修复师</text>
+    <text class="user-stat">您已修复 {{historyCount}} 张照片</text>
+  </view>
+
+  <!-- 统计卡片区 -->
+  <view class="stats-row mt-32">
+    <view class="stats-card">
+      <text class="stats-number text-amber">{{historyCount}}</text>
+      <text class="stats-label">修复次数</text>
+    </view>
+    <view class="stats-card">
+      <text class="stats-number text-amber">{{savedCount}}</text>
+      <text class="stats-label">收藏数量</text>
+    </view>
+    <view class="stats-card">
+      <text class="stats-number text-amber">7</text>
+      <text class="stats-label">连续天数</text>
+    </view>
+  </view>
+
+  <!-- 修复历史列表 -->
+  <view class="history-section mt-48">
+    <!-- 标题行 -->
+    <view class="history-header">
+      <text class="history-title">修复历史</text>
+      <text
+        class="history-clear {{historyList.length === 0 ? 'disabled' : ''}}"
+        bindtap="onClearAll"
+      >清空</text>
+    </view>
+
+    <!-- 历史记录列表 -->
+    <block wx:if="{{historyList.length > 0}}">
+      <view class="history-list mt-24">
+        <block wx:for="{{historyList}}" wx:key="id">
+          <view class="history-item">
+            <image
+              class="history-thumb"
+              src="{{item.image}}"
+              mode="aspectFill"
+            />
+            <view class="history-info">
+              <text class="history-filename">{{item.fileName}}</text>
+              <view class="history-meta">
+                <text class="badge badge-{{item.mode}}">{{item.modeLabel}}</text>
+                <text class="history-time">{{item.time}}</text>
+              </view>
+            </view>
+            <view class="history-actions">
+              <text class="action-btn" data-index="{{index}}" bindtap="onPreviewHistory">👁</text>
+              <text class="action-btn" data-index="{{index}}" bindtap="onDeleteHistory">🗑</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <block wx:else>
+      <view class="empty-state">
+        <text class="empty-icon">🖼</text>
+        <text class="empty-title">暂无修复记录</text>
+        <text class="empty-desc">去修复您的第一张照片吧</text>
+        <view class="btn-primary empty-btn" bindtap="navigateToRestore">
+          去修复
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-section mt-48">
+    <block wx:for="{{menuList}}" wx:key="label">
+      <view class="menu-item" bindtap="onMenuTap" data-label="{{item.label}}">
+        <view class="menu-left">
+          <text class="menu-icon">{{item.icon}}</text>
+          <text class="menu-text">{{item.label}}</text>
+        </view>
+        <text class="menu-arrow">></text>
+      </view>
+    </block>
+  </view>
+
+</view>

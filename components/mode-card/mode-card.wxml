@@ -1,8 +1,0 @@
-<view class="mode-card {{selected ? 'mode-card--selected' : ''}}" style="border-color: {{selected ? modeData.color : '#E6D5B8'}};" bindtap="onTap">
-  <view class="mode-card__strip" style="background: {{modeData.color}};"></view>
-  <view class="mode-card__content">
-    <text class="mode-card__icon">{{modeData.icon}}</text>
-    <text class="mode-card__name">{{modeData.name}}</text>
-    <text class="mode-card__desc">{{modeData.desc}}</text>
-  </view>
-</view>

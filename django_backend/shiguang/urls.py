@@ -17,6 +17,9 @@ urlpatterns = [
     path('api/', include('users.urls')),       # /api/auth/*
     path('api/', include('api.urls')),         # /api/upload, /api/repair 等
     path('api/stats/', include('stats.urls')), # /api/stats/*
+    
+    # Web 前端 - H5照片修复页面
+    path('webapp/', include('webapp.urls')),   # /webapp/
 ]
 
 # 开发环境提供媒体文件访问

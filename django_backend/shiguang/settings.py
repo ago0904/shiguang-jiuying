@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'api',
     'stats',
     'admin_portal',
+    'webapp',
 ]
 
 MIDDLEWARE = [

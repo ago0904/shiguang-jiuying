@@ -1,19 +1,17 @@
 """
 Web前端视图 - H5照片修复页面
+返回React构建的单页应用
 """
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.conf import settings
 import time
 
 
 def index(request):
-    """H5照片修复首页"""
-    return render(request, 'webapp/index.html', {
-        'api_base': '',  # 使用相对路径
-    })
+    """H5照片修复首页 - React SPA"""
+    return render(request, 'webapp/index.html')
 
 
 @csrf_exempt
@@ -25,7 +23,7 @@ def webapp_config(request):
         "message": "成功",
         "data": {
             "api_base": "/api",
-            "max_file_size": 20 * 1024 * 1024,  # 20MB
+            "max_file_size": 20 * 1024 * 1024,
             "allowed_types": ["image/jpeg", "image/png", "image/bmp", "image/webp"],
             "modes": [
                 {"key": "colorize", "name": "黑白上色", "icon": "🎨", "color": "#C47B5A",

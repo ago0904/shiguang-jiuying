@@ -1,0 +1,241 @@
+/* pages/login/login.wxss */
+
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FAF3E7 0%, #FFF8EE 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 48rpx 48rpx;
+  box-sizing: border-box;
+}
+
+/* ===== 品牌区域 ===== */
+.brand-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 64rpx;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(212, 163, 90, 0.3);
+}
+
+.brand-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #2D2A26;
+  margin-bottom: 12rpx;
+}
+
+.brand-slogan {
+  font-size: 26rpx;
+  color: #9C968F;
+}
+
+/* ===== 登录卡片 ===== */
+.login-section {
+  width: 100%;
+  max-width: 640rpx;
+}
+
+.login-card, .user-card {
+  background: #FFF8EE;
+  border-radius: 32rpx;
+  padding: 48rpx 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #2D2A26;
+  margin-bottom: 12rpx;
+}
+
+.login-desc {
+  font-size: 26rpx;
+  color: #6B6560;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+/* ===== 功能列表 ===== */
+.feature-list {
+  width: 100%;
+  margin-bottom: 40rpx;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: #FAF3E7;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.feature-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.feature-text {
+  font-size: 28rpx;
+  color: #2D2A26;
+}
+
+/* ===== 微信登录按钮 ===== */
+.wx-login-btn {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #07C160 0%, #05a350 100%);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(7, 193, 96, 0.3);
+  margin-bottom: 24rpx;
+}
+
+.wx-login-btn:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.wx-icon {
+  margin-right: 12rpx;
+  font-size: 36rpx;
+}
+
+/* ===== 游客模式 ===== */
+.guest-option {
+  text-align: center;
+  padding: 16rpx 0;
+}
+
+.guest-text {
+  font-size: 26rpx;
+  color: #9C968F;
+}
+
+.guest-option:active .guest-text {
+  color: #D4A35A;
+}
+
+/* ===== 用户卡片 ===== */
+.user-avatar {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 72rpx;
+  margin-bottom: 20rpx;
+  border: 4rpx solid #D4A35A;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #2D2A26;
+  margin-bottom: 8rpx;
+}
+
+.user-id {
+  font-size: 22rpx;
+  color: #9C968F;
+  margin-bottom: 32rpx;
+}
+
+/* ===== 用户统计 ===== */
+.user-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 24rpx 0;
+  border-top: 2rpx solid #E6D5B8;
+  border-bottom: 2rpx solid #E6D5B8;
+  margin-bottom: 32rpx;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-num {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #D4A35A;
+  margin-bottom: 4rpx;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #6B6560;
+}
+
+.stat-divider {
+  width: 2rpx;
+  height: 60rpx;
+  background: #E6D5B8;
+}
+
+/* ===== 操作按钮 ===== */
+.action-btns {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.action-btn {
+  width: 100%;
+  height: 88rpx;
+  border-radius: 24rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #D4A35A 0%, #C4934A 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(212, 163, 90, 0.3);
+}
+
+.action-btn.secondary {
+  background: transparent;
+  color: #6B6560;
+  border: 2rpx solid #C4A87C;
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* ===== 底部 ===== */
+.footer-text {
+  margin-top: auto;
+  padding-top: 48rpx;
+  font-size: 22rpx;
+  color: #9C968F;
+  text-align: center;
+}

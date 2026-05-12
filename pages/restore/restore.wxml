@@ -1,0 +1,150 @@
+<view class="restore-page container">
+
+  <!-- ========== 状态1: 上传照片 ========== -->
+  <block wx:if="{{step === 'upload'}}">
+    <view class="animate-fade-in-up">
+      <text class="page-title">上传老照片</text>
+
+      <!-- 上传区域 -->
+      <upload-zone bind:choose="onChoosePhoto" />
+
+      <!-- 已选图片预览 -->
+      <view wx:if="{{selectedImage}}" class="preview-section">
+        <text class="preview-label">已选照片</text>
+        <view class="preview-image-wrapper" bindtap="onChoosePhoto">
+          <image class="preview-image" src="{{selectedImage}}" mode="aspectFit" />
+          <view class="preview-change-overlay">
+            <text class="preview-change-text">点击重新选择</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 下一步按钮 -->
+      <button
+        class="btn-primary mt-48 {{selectedImage ? '' : 'btn-disabled'}}"
+        disabled="{{!selectedImage}}"
+        bindtap="goToModeStep"
+      >
+        下一步：选择修复模式
+      </button>
+    </view>
+  </block>
+
+  <!-- ========== 状态2: 选择修复模式 ========== -->
+  <block wx:if="{{step === 'mode'}}">
+    <view class="animate-fade-in-up">
+      <!-- 返回按钮 -->
+      <view class="mode-header">
+        <view class="back-btn" bindtap="goBackToUpload">
+          <text class="back-arrow">←</text>
+          <text class="back-text">返回</text>
+        </view>
+      </view>
+
+      <text class="page-title">选择修复模式</text>
+      <text class="page-subtitle">至少选择一种修复模式</text>
+
+      <!-- 四个模式卡片 2×2 网格 -->
+      <view class="mode-grid">
+        <mode-card
+          wx:for="{{modeList}}"
+          wx:key="item"
+          mode="{{item}}"
+          selected="{{selectedModes.includes(item)}}"
+          bind:select="onModeSelect"
+        />
+      </view>
+
+      <!-- 已选模式标签 -->
+      <view wx:if="{{selectedModes.length > 0}}" class="selected-modes mt-32">
+        <text class="selected-modes__label">已选模式：</text>
+        <view class="selected-modes__tags">
+          <text
+            wx:for="{{selectedModes}}"
+            wx:key="item"
+            class="badge badge-{{item}}"
+          >{{modeNameMap[item]}}</text>
+        </view>
+      </view>
+
+      <!-- 开始修复按钮 -->
+      <button
+        class="btn-primary mt-48 {{selectedModes.length > 0 ? '' : 'btn-disabled'}}"
+        disabled="{{selectedModes.length === 0}}"
+        bindtap="startProcessing"
+      >
+        开始AI修复
+      </button>
+    </view>
+  </block>
+
+  <!-- ========== 状态3: 处理中 ========== -->
+  <block wx:if="{{step === 'processing'}}">
+    <view class="processing-overlay">
+      <view class="processing-content">
+        <!-- 进度环 -->
+        <progress-ring progress="{{progress}}" />
+
+        <!-- 状态文字 -->
+        <text class="processing-status">{{statusText}}</text>
+
+        <!-- 步骤进度条 -->
+        <view class="step-progress">
+          <view class="step-item {{progress >= 0 ? 'step-item--active' : ''}} {{progress >= 25 ? 'step-item--done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">上传完成</text>
+          </view>
+          <view class="step-line {{progress >= 25 ? 'step-line--active' : ''}}"></view>
+          <view class="step-item {{progress >= 25 ? 'step-item--active' : ''}} {{progress >= 50 ? 'step-item--done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">选择模式</text>
+          </view>
+          <view class="step-line {{progress >= 50 ? 'step-line--active' : ''}}"></view>
+          <view class="step-item {{progress >= 50 ? 'step-item--active' : ''}} {{progress >= 80 ? 'step-item--done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">AI修复中</text>
+          </view>
+          <view class="step-line {{progress >= 80 ? 'step-line--active' : ''}}"></view>
+          <view class="step-item {{progress >= 80 ? 'step-item--active' : ''}} {{progress >= 100 ? 'step-item--done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">修复完成</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- ========== 状态4: 对比结果 ========== -->
+  <block wx:if="{{step === 'result'}}">
+    <view class="animate-fade-in-up">
+      <text class="page-title">修复完成</text>
+
+      <!-- 对比滑块 -->
+      <compare-slider
+        originalImage="{{selectedImage}}"
+        resultImage="{{resultImage}}"
+        sliderPosition="{{50}}"
+      />
+
+      <!-- 修复信息 -->
+      <view class="result-info">
+        <view class="result-info__tags">
+          <text
+            wx:for="{{selectedModes}}"
+            wx:key="item"
+            class="badge badge-{{item}}"
+          >{{modeNameMap[item]}}</text>
+        </view>
+        <text class="result-info__time">修复用时 {{processTime}} 秒</text>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="result-actions">
+        <button class="btn-secondary" bindtap="resetAll">重新修复</button>
+        <button class="btn-primary flex-1" bindtap="saveToAlbum">保存相册</button>
+        <button class="btn-secondary" bindtap="downloadImage">下载图片</button>
+      </view>
+    </view>
+  </block>
+
+</view>

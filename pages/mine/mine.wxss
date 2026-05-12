@@ -1,0 +1,256 @@
+/* 我的页样式 */
+
+/* ===== 用户信息区 ===== */
+.user-card {
+  background: linear-gradient(135deg, #D4A35A 0%, #C4934A 100%);
+  border-radius: 24rpx;
+  padding: 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8rpx 32rpx rgba(212,163,90,0.35);
+}
+
+.user-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+}
+
+.user-name {
+  font-size: 36rpx;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-top: 16rpx;
+}
+
+.user-stat {
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.8);
+  margin-top: 8rpx;
+}
+
+/* ===== 统计卡片区 ===== */
+.stats-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.stats-card {
+  background-color: #FFF8EE;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  flex: 1;
+  text-align: center;
+  margin: 0 8rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.stats-card:first-child {
+  margin-left: 0;
+}
+
+.stats-card:last-child {
+  margin-right: 0;
+}
+
+.stats-number {
+  font-size: 40rpx;
+  font-weight: 700;
+  display: block;
+}
+
+.stats-label {
+  font-size: 22rpx;
+  color: #6B6560;
+  margin-top: 8rpx;
+  display: block;
+}
+
+/* ===== 修复历史列表 ===== */
+.history-section {
+  background-color: #FFF8EE;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #2D2A26;
+}
+
+.history-clear {
+  font-size: 26rpx;
+  color: #9C968F;
+}
+
+.history-clear.disabled {
+  opacity: 0.4;
+}
+
+/* 历史记录项 */
+.history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid rgba(196,168,124,0.2);
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-thumb {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+.history-info {
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.history-filename {
+  font-size: 28rpx;
+  color: #2D2A26;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.history-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.history-time {
+  font-size: 22rpx;
+  color: #9C968F;
+  margin-left: 12rpx;
+}
+
+.history-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 16rpx;
+}
+
+.action-btn {
+  font-size: 40rpx;
+  padding: 12rpx;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.action-btn:active {
+  opacity: 1;
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64rpx 0;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  color: #9C968F;
+  line-height: 1;
+}
+
+.empty-title {
+  font-size: 28rpx;
+  color: #9C968F;
+  margin-top: 24rpx;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: #9C968F;
+  margin-top: 8rpx;
+}
+
+.empty-btn {
+  width: 50%;
+  margin-top: 32rpx;
+}
+
+/* ===== 菜单列表 ===== */
+.menu-section {
+  background-color: #FFF8EE;
+  border-radius: 24rpx;
+  padding: 0 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 2rpx solid rgba(196,168,124,0.2);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.menu-text {
+  font-size: 30rpx;
+  color: #2D2A26;
+}
+
+.menu-arrow {
+  font-size: 28rpx;
+  color: #9C968F;
+}

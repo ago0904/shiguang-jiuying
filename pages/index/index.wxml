@@ -1,0 +1,150 @@
+<!--pages/index/index.wxml-->
+
+<!-- ==================== 区域1：品牌Header ==================== -->
+<view class="brand-header">
+  <view class="brand-left">
+    <image class="brand-icon" src="/images/icon-camera.png" mode="aspectFit" />
+    <text class="brand-name">拾光旧影</text>
+  </view>
+  <view class="brand-right" bindtap="navigateToRestore" data-mode="history">
+    <image class="history-icon" src="/images/icon-history.png" mode="aspectFit" />
+  </view>
+</view>
+
+<!-- ==================== 区域2：Hero区域 ==================== -->
+<view class="hero-section {{showHero ? 'fade-in-up' : 'hidden'}}">
+  <!-- 背景图 -->
+  <view class="hero-bg-wrapper">
+    <image class="hero-bg" src="/images/hero-bg.jpg" mode="aspectFill" />
+    <view class="hero-bg-overlay"></view>
+  </view>
+
+  <!-- Hero内容 -->
+  <view class="hero-content">
+    <text class="hero-title">让旧时光\n重现光彩</text>
+    <text class="hero-subtitle">AI智能修复，让珍贵回忆清晰如初</text>
+
+    <!-- CTA按钮 -->
+    <view class="btn-primary hero-cta" bindtap="onHeroCTAClick">
+      <text class="btn-text">开始修复</text>
+      <text class="btn-arrow">→</text>
+    </view>
+
+    <!-- 功能标签 -->
+    <view class="hero-tags">
+      <text class="hero-tags-text">支持黑白上色 · 破损修复 · 清晰度增强 · 智能去噪</text>
+    </view>
+  </view>
+
+  <!-- 向下滚动提示箭头 -->
+  <view class="scroll-hint" bindtap="onScrollDown">
+    <view class="scroll-arrow-wrapper">
+      <text class="scroll-arrow">↓</text>
+    </view>
+    <text class="scroll-hint-text">向下滑动</text>
+  </view>
+</view>
+
+<!-- ==================== 区域3：功能特色（4个模式卡片） ==================== -->
+<view class="feature-section {{showFeatures ? 'fade-in-up' : 'hidden'}}">
+  <view class="section-header">
+    <text class="section-title">四大修复模式</text>
+    <view class="section-line"></view>
+  </view>
+
+  <view class="mode-grid">
+    <view
+      class="mode-card"
+      wx:for="{{modeList}}"
+      wx:key="key"
+      data-mode="{{item.key}}"
+      bindtap="navigateToRestore"
+    >
+      <!-- 顶部色条 -->
+      <view class="mode-card-bar" style="background-color: {{item.color}};"></view>
+
+      <!-- 图标区域 -->
+      <view class="mode-icon-wrapper" style="background-color: {{item.bgColor}};">
+        <text class="mode-icon">{{item.icon}}</text>
+      </view>
+
+      <!-- 模式名称 -->
+      <text class="mode-name">{{item.name}}</text>
+
+      <!-- 描述 -->
+      <text class="mode-desc">{{item.desc}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- ==================== 区域4：案例预览（横向滚动） ==================== -->
+<view class="case-section {{showCases ? 'fade-in-up' : 'hidden'}}">
+  <view class="section-header">
+    <text class="section-title">精选修复案例</text>
+    <view class="section-line"></view>
+  </view>
+
+  <scroll-view class="case-scroll" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="case-list">
+      <view class="case-card" wx:for="{{caseList}}" wx:key="id">
+        <image class="case-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="case-overlay">
+          <text class="case-title">{{item.title}}</text>
+          <text class="case-subtitle">{{item.subtitle}}</text>
+        </view>
+        <!-- 修复前后标签 -->
+        <view class="case-badge">
+          <text class="case-badge-text">AI修复</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- ==================== 区域5：用户评价 ==================== -->
+<view class="review-section {{showReviews ? 'fade-in-up' : 'hidden'}}">
+  <view class="section-header">
+    <text class="section-title">用户心声</text>
+    <view class="section-line"></view>
+  </view>
+
+  <view class="review-list">
+    <view class="review-card" wx:for="{{reviewList}}" wx:key="id">
+      <!-- 用户信息 -->
+      <view class="review-user">
+        <image class="review-avatar" src="{{item.avatar}}" mode="aspectFill" />
+        <view class="review-user-info">
+          <text class="review-username">{{item.name}}</text>
+          <view class="review-stars">
+            <text class="star" wx:for="{{[1,2,3,4,5]}}" wx:for-item="star" wx:key="*this">★</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 评价内容 -->
+      <view class="review-quote">
+        <text class="review-content">{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- ==================== 区域6：CTA底部 ==================== -->
+<view class="cta-section {{showCTA ? 'fade-in-up' : 'hidden'}}">
+  <view class="cta-bg">
+    <image class="cta-bg-image" src="/images/hero-bg.jpg" mode="aspectFill" />
+    <view class="cta-bg-overlay"></view>
+  </view>
+
+  <view class="cta-content">
+    <text class="cta-title">开始修复您的珍贵回忆</text>
+    <view class="btn-primary cta-btn" bindtap="onCTAClick">
+      <text class="btn-text">立即体验</text>
+      <text class="btn-arrow">→</text>
+    </view>
+    <text class="cta-subtext">免费体验 · 无需注册 · 快速出图</text>
+  </view>
+</view>
+
+<!-- 底部留白 -->
+<view class="bottom-space"></view>

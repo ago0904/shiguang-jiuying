@@ -1,7 +1,0 @@
-<view class="upload-zone {{active ? 'upload-zone--active' : ''}}" bindtap="onTap" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
-  <view class="upload-zone__inner">
-    <text class="upload-zone__icon">📷</text>
-    <text class="upload-zone__title">点击或拖拽上传照片</text>
-    <text class="upload-zone__hint">JPG、PNG、BMP · 最大20MB</text>
-  </view>
-</view>

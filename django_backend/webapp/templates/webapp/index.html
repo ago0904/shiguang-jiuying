@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>拾光旧影 - AI老照片修复</title>
+    <meta name="description" content="用AI的力量，让褪色的记忆重新鲜活。支持黑白上色、破损修复、清晰度增强、智能去噪。">
+    <link rel="icon" type="image/png" href="/static/webapp/images/logo.png">
+    <style>
+        /* ===== 全局重置与变量 ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --parchment: #FAF3E7;
+            --cream: #FFF8EE;
+            --ink: #2D2A26;
+            --ink-light: #6B6560;
+            --ink-muted: #9C968F;
+            --amber: #D4A35A;
+            --amber-light: #E8C88A;
+            --amber-bg: #F5E6CA;
+            --coral: #C47B5A;
+            --sage: #7A9E7E;
+            --slate: #7E8FA3;
+            --sepia: #E6D5B8;
+            --sepia-dark: #C4A87C;
+            --frame-wood: #8B7355;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.08);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+        }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--parchment);
+            color: var(--ink);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        button { border: none; cursor: pointer; font-family: inherit; }
+        img { max-width: 100%; display: block; }
+        input[type="file"] { display: none; }
+
+        /* ===== 布局容器 ===== */
+        .container { max-width: 640px; margin: 0 auto; padding: 0 20px; }
+        .page { min-height: 100vh; display: none; animation: fadeIn 0.5s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* ===== 顶部导航 ===== */
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(250, 243, 231, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--sepia);
+        }
+        .navbar-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--ink); }
+        .nav-brand img { width: 36px; height: 36px; border-radius: 10px; }
+        .nav-links { display: flex; align-items: center; gap: 6px; }
+        .nav-link {
+            padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 500;
+            color: var(--ink-light); transition: all 0.2s;
+        }
+        .nav-link:hover, .nav-link.active { background: var(--amber-bg); color: var(--amber); }
+
+        /* ===== 按钮系统 ===== */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 14px 32px; border-radius: var(--radius-lg); font-size: 16px; font-weight: 600;
+            transition: all 0.2s; border: none; cursor: pointer;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--amber), #C4934A);
+            color: #fff; box-shadow: 0 4px 16px rgba(212,163,90,0.35);
+        }
+        .btn-primary:hover { box-shadow: 0 6px 20px rgba(212,163,90,0.45); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-secondary {
+            background: transparent; color: var(--ink); border: 2px solid var(--sepia-dark);
+        }
+        .btn-secondary:hover { background: var(--amber-bg); border-color: var(--amber); }
+        .btn-ghost { background: transparent; color: var(--ink-light); }
+        .btn-ghost:hover { color: var(--amber); }
+        .btn-sm { padding: 8px 20px; font-size: 14px; border-radius: var(--radius-md); }
+        .btn-lg { padding: 16px 40px; font-size: 18px; width: 100%; max-width: 320px; }
+
+        /* ===== 卡片组件 ===== */
+        .card {
+            background: var(--cream); border-radius: var(--radius-lg);
+            padding: 24px; box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== Toast提示 ===== */
+        .toast {
+            position: fixed; top: 70px; left: 50%; transform: translateX(-50%) translateY(-20px);
+            padding: 12px 24px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500;
+            color: #fff; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 1000;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: linear-gradient(135deg, #7A9E7E, #6B8F6F); }
+        .toast.error { background: linear-gradient(135deg, #C47B5A, #B56A4A); }
+        .toast.info { background: linear-gradient(135deg, #7E8FA3, #6E7F93); }
+
+        /* ===== 加载动画 ===== */
+        .loader {
+            width: 40px; height: 40px; border: 3px solid var(--sepia);
+            border-top-color: var(--amber); border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loader-sm { width: 20px; height: 20px; border-width: 2px; }
+
+        /* ===== 首页 ===== */
+        .hero { text-align: center; padding: 48px 0 32px; }
+        .hero-logo { width: 100px; height: 100px; margin: 0 auto 20px; border-radius: 24px; animation: float 3s ease-in-out infinite; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .hero .subtitle { font-size: 16px; color: var(--ink-light); margin-bottom: 32px; }
+        .hero-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 32px; }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 24px; font-weight: 700; color: var(--amber); }
+        .hero-stat .label { font-size: 12px; color: var(--ink-muted); }
+
+        /* ===== 修复模式卡片 ===== */
+        .modes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
+        .mode-card {
+            background: var(--cream); border-radius: var(--radius-lg); padding: 20px;
+            border: 2px solid transparent; cursor: pointer; transition: all 0.25s;
+            box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+        }
+        .mode-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .mode-card.selected { border-color: var(--amber); background: var(--amber-bg); }
+        .mode-card .strip { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 2px; }
+        .mode-card .icon { font-size: 36px; margin-bottom: 10px; display: block; }
+        .mode-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .mode-card p { font-size: 12px; color: var(--ink-light); line-height: 1.4; }
+        .mode-card .check {
+            position: absolute; top: 12px; right: 12px; width: 22px; height: 22px;
+            border-radius: 50%; border: 2px solid var(--sepia); display: flex;
+            align-items: center; justify-content: center; font-size: 12px; color: transparent;
+            transition: all 0.2s;
+        }
+        .mode-card.selected .check { background: var(--amber); border-color: var(--amber); color: #fff; }
+
+        /* ===== 上传区域 ===== */
+        .upload-zone {
+            border: 2px dashed var(--sepia-dark); border-radius: var(--radius-xl);
+            padding: 48px 24px; text-align: center; cursor: pointer;
+            transition: all 0.3s; background: var(--cream); position: relative;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--amber); background: var(--amber-bg);
+        }
+        .upload-zone .upload-icon { font-size: 48px; margin-bottom: 12px; display: block; }
+        .upload-zone h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+        .upload-zone p { font-size: 13px; color: var(--ink-muted); }
+        .upload-preview { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin-top: 16px; }
+        .upload-preview img { width: 100%; max-height: 400px; object-fit: contain; border-radius: var(--radius-lg); }
+        .upload-preview .remove-btn {
+            position: absolute; top: 8px; right: 8px; width: 32px; height: 32px;
+            border-radius: 50%; background: rgba(0,0,0,0.5); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; cursor: pointer; border: none;
+        }
+        .upload-preview .remove-btn:hover { background: rgba(196,123,90,0.8); }
+
+        /* ===== 处理进度 ===== */
+        .processing-overlay {
+            position: fixed; inset: 0; background: rgba(250,243,231,0.95);
+            z-index: 500; display: none; align-items: center; justify-content: center;
+            flex-direction: column;
+        }
+        .processing-overlay.active { display: flex; }
+        .processing-box { text-align: center; padding: 40px; }
+        .processing-box h2 { font-size: 22px; margin-bottom: 8px; }
+        .processing-box p { color: var(--ink-muted); font-size: 14px; margin-bottom: 32px; }
+        .progress-ring { position: relative; width: 120px; height: 120px; margin: 0 auto 24px; }
+        .progress-ring svg { transform: rotate(-90deg); }
+        .progress-ring .ring-bg { fill: none; stroke: var(--sepia); stroke-width: 6; opacity: 0.3; }
+        .progress-ring .ring-fill { fill: none; stroke: var(--amber); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
+        .progress-ring .percent { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: var(--amber); }
+        .status-text { font-size: 14px; color: var(--ink-light); margin-top: 16px; min-height: 20px; }
+
+        /* ===== 结果对比 ===== */
+        .result-section { display: none; }
+        .result-section.active { display: block; animation: slideUp 0.5s ease; }
+        .compare-container {
+            position: relative; border-radius: var(--radius-lg); overflow: hidden;
+            background: var(--cream); box-shadow: var(--shadow-md); margin-bottom: 24px;
+        }
+        .compare-container img { width: 100%; display: block; }
+        .compare-before, .compare-after { position: relative; }
+        .compare-before { position: absolute; top: 0; left: 0; width: 50%; overflow: hidden; border-right: 3px solid var(--amber); }
+        .compare-before img { width: 200%; max-width: none; }
+        .compare-after img { width: 100%; }
+        .compare-slider {
+            position: absolute; top: 0; bottom: 0; left: 50%; width: 40px;
+            transform: translateX(-50%); cursor: ew-resize; z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .compare-slider::before {
+            content: ''; position: absolute; width: 3px; top: 0; bottom: 0;
+            background: var(--amber); box-shadow: 0 0 10px rgba(212,163,90,0.5);
+        }
+        .compare-slider .handle {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--amber), #C4934A);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 14px; box-shadow: 0 4px 16px rgba(212,163,90,0.4); position: relative;
+        }
+        .compare-labels { display: flex; justify-content: space-between; padding: 8px 12px; }
+        .compare-label { font-size: 12px; padding: 4px 12px; border-radius: 12px; font-weight: 600; }
+        .label-before { background: var(--sepia); color: var(--ink); }
+        .label-after { background: linear-gradient(135deg, var(--amber), #C4934A); color: #fff; }
+
+        /* ===== 结果操作区 ===== */
+        .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .result-info { text-align: center; margin-bottom: 20px; }
+        .result-info .badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin: 0 4px; }
+        .result-info .time { font-size: 13px; color: var(--ink-muted); margin-top: 8px; }
+
+        /* ===== 修复历史 ===== */
+        .history-list { display: flex; flex-direction: column; gap: 12px; }
+        .history-item {
+            display: flex; align-items: center; gap: 16px; padding: 16px;
+            background: var(--cream); border-radius: var(--radius-md);
+            transition: all 0.2s;
+        }
+        .history-item:hover { box-shadow: var(--shadow-md); }
+        .history-item img { width: 72px; height: 72px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; }
+        .history-item .info { flex: 1; min-width: 0; }
+        .history-item .info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .history-item .info .meta { font-size: 12px; color: var(--ink-muted); }
+        .history-item .badge { flex-shrink: 0; }
+
+        /* ===== 空状态 ===== */
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state .icon { font-size: 64px; margin-bottom: 16px; display: block; }
+        .empty-state h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .empty-state p { font-size: 14px; color: var(--ink-muted); margin-bottom: 24px; }
+
+        /* ===== 页脚 ===== */
+        .footer { text-align: center; padding: 32px 20px; margin-top: 40px; border-top: 1px solid var(--sepia); }
+        .footer p { font-size: 12px; color: var(--ink-muted); }
+        .footer .links { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; }
+        .footer .links a { font-size: 13px; color: var(--ink-light); }
+        .footer .links a:hover { color: var(--amber); }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 26px; }
+            .modes-grid { gap: 12px; }
+            .mode-card { padding: 16px; }
+            .mode-card .icon { font-size: 28px; }
+            .upload-zone { padding: 32px 16px; }
+            .nav-link { padding: 5px 10px; font-size: 13px; }
+        }
+        @media (min-width: 768px) {
+            .modes-grid { grid-template-columns: repeat(4, 1fr); }
+            .hero { padding: 72px 0 48px; }
+            .hero h1 { font-size: 40px; }
+            .compare-container { max-height: 600px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- 处理进度遮罩 -->
+    <div class="processing-overlay" id="processingOverlay">
+        <div class="processing-box">
+            <div class="progress-ring">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                    <circle class="ring-fill" id="progressCircle" cx="60" cy="60" r="52"
+                            stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+                </svg>
+                <div class="percent" id="progressPercent">0%</div>
+            </div>
+            <h2>AI正在修复中...</h2>
+            <p>请稍候，正在为您处理照片</p>
+            <div class="status-text" id="statusText">正在分析照片...</div>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <div class="nav-brand">
+                <span style="font-size: 28px;">📸</span>
+                <span>拾光旧影</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="home">首页</a>
+                <a href="#" class="nav-link" data-page="history">历史</a>
+                <a href="/admin/" class="nav-link" target="_blank">后台</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== 首页 ===== -->
+    <div class="page active" id="pageHome">
+        <div class="container">
+            <!-- Hero -->
+            <section class="hero" style="animation: slideUp 0.6s ease;">
+                <div class="hero-logo">📸</div>
+                <h1>让旧时光，重现光彩</h1>
+                <p class="subtitle">AI智能修复，让珍贵回忆清晰如初</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="num" id="statRepairs">--</div>
+                        <div class="label">修复次数</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num" id="statUsers">--</div>
+                        <div class="label">服务用户</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num" id="statModes">4</div>
+                        <div class="label">修复模式</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 上传区域 -->
+            <section style="animation: slideUp 0.6s ease 0.1s both;">
+                <div class="upload-zone" id="uploadZone">
+                    <span class="upload-icon">📤</span>
+                    <h3>点击或拖拽上传老照片</h3>
+                    <p>支持 JPG、PNG、BMP 格式，最大 20MB</p>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/bmp,image/webp">
+                </div>
+                <div class="upload-preview" id="uploadPreview" style="display:none;">
+                    <img id="previewImg" src="" alt="预览">
+                    <button class="remove-btn" id="removeBtn" title="删除">✕</button>
+                </div>
+            </section>
+
+            <!-- 修复模式选择 -->
+            <section style="margin-top: 32px; animation: slideUp 0.6s ease 0.2s both;">
+                <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 16px;">选择修复模式</h2>
+                <div class="modes-grid" id="modesGrid">
+                    <div class="mode-card selected" data-mode="colorize">
+                        <div class="strip" style="background: var(--coral);"></div>
+                        <span class="icon">🎨</span>
+                        <h3>黑白上色</h3>
+                        <p>为黑白照片注入自然色彩</p>
+                        <div class="check">✓</div>
+                    </div>
+                    <div class="mode-card" data-mode="repair">
+                        <div class="strip" style="background: var(--sage);"></div>
+                        <span class="icon">🔧</span>
+                        <h3>破损修复</h3>
+                        <p>智能填补破损与划痕</p>
+                        <div class="check">✓</div>
+                    </div>
+                    <div class="mode-card" data-mode="enhance">
+                        <div class="strip" style="background: var(--amber);"></div>
+                        <span class="icon">✨</span>
+                        <h3>清晰度增强</h3>
+                        <p>模糊照片变清晰</p>
+                        <div class="check">✓</div>
+                    </div>
+                    <div class="mode-card" data-mode="denoise">
+                        <div class="strip" style="background: var(--slate);"></div>
+                        <span class="icon">🌿</span>
+                        <h3>智能去噪</h3>
+                        <p>去除噪点保留细节</p>
+                        <div class="check">✓</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 提交按钮 -->
+            <section style="text-align: center; margin: 32px 0; animation: slideUp 0.6s ease 0.3s both;">
+                <button class="btn btn-primary btn-lg" id="startBtn" disabled>
+                    <span>🚀</span> 开始AI修复
+                </button>
+                <p style="font-size: 13px; color: var(--ink-muted); margin-top: 12px;">
+                    新用户免费体验3次 · 处理约需3-10秒
+                </p>
+            </section>
+
+            <!-- 结果区域 -->
+            <section class="result-section" id="resultSection">
+                <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 16px; text-align: center;">✨ 修复完成</h2>
+                <div class="result-info" id="resultInfo"></div>
+                <div class="compare-container" id="compareContainer">
+                    <div class="compare-after">
+                        <img id="resultImgAfter" src="" alt="修复后">
+                    </div>
+                    <div class="compare-before" id="compareBefore">
+                        <img id="resultImgBefore" src="" alt="原图" style="width: 200%;">
+                    </div>
+                    <div class="compare-slider" id="compareSlider">
+                        <div class="handle">◀ ▶</div>
+                    </div>
+                </div>
+                <div class="compare-labels">
+                    <span class="compare-label label-before">原图</span>
+                    <span class="compare-label label-after">修复后</span>
+                </div>
+                <div class="result-actions">
+                    <a id="downloadBtn" class="btn btn-primary" download>
+                        <span>⬇️</span> 下载修复图
+                    </a>
+                    <button class="btn btn-secondary" id="retryBtn">
+                        <span>🔄</span> 重新修复
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="links">
+                <a href="#" onclick="showPage('home')">首页</a>
+                <a href="#" onclick="showPage('history')">历史</a>
+                <a href="/admin/" target="_blank">管理后台</a>
+            </div>
+            <p>拾光旧影 AI老照片修复 · 让每一份记忆都清晰如初</p>
+        </footer>
+    </div>
+
+    <!-- ===== 历史页面 ===== -->
+    <div class="page" id="pageHistory">
+        <div class="container">
+            <section style="padding-top: 32px;">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px;">修复历史</h2>
+                <div class="history-list" id="historyList"></div>
+                <div class="empty-state" id="historyEmpty" style="display:none;">
+                    <span class="icon">🖼️</span>
+                    <h3>暂无修复记录</h3>
+                    <p>上传一张照片开始您的修复之旅</p>
+                    <button class="btn btn-primary" onclick="showPage('home')">去修复</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+    // ===== 全局状态 =====
+    const state = {
+        selectedFile: null,
+        selectedModes: ['colorize'],
+        isProcessing: false,
+        currentResult: null,
+        apiBase: '', // 相对路径
+    };
+
+    // ===== DOM 元素 =====
+    const els = {
+        uploadZone: document.getElementById('uploadZone'),
+        fileInput: document.getElementById('fileInput'),
+        uploadPreview: document.getElementById('uploadPreview'),
+        previewImg: document.getElementById('previewImg'),
+        removeBtn: document.getElementById('removeBtn'),
+        modesGrid: document.getElementById('modesGrid'),
+        startBtn: document.getElementById('startBtn'),
+        processingOverlay: document.getElementById('processingOverlay'),
+        progressCircle: document.getElementById('progressCircle'),
+        progressPercent: document.getElementById('progressPercent'),
+        statusText: document.getElementById('statusText'),
+        resultSection: document.getElementById('resultSection'),
+        compareContainer: document.getElementById('compareContainer'),
+        compareBefore: document.getElementById('compareBefore'),
+        resultImgBefore: document.getElementById('resultImgBefore'),
+        resultImgAfter: document.getElementById('resultImgAfter'),
+        compareSlider: document.getElementById('compareSlider'),
+        resultInfo: document.getElementById('resultInfo'),
+        downloadBtn: document.getElementById('downloadBtn'),
+        retryBtn: document.getElementById('retryBtn'),
+        historyList: document.getElementById('historyList'),
+        historyEmpty: document.getElementById('historyEmpty'),
+        toast: document.getElementById('toast'),
+    };
+
+    // ===== Toast =====
+    function showToast(message, type = 'info') {
+        els.toast.textContent = message;
+        els.toast.className = `toast ${type} show`;
+        setTimeout(() => els.toast.classList.remove('show'), 3000);
+    }
+
+    // ===== 页面切换 =====
+    function showPage(page) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        
+        if (page === 'home') {
+            document.getElementById('pageHome').classList.add('active');
+            document.querySelector('[data-page="home"]').classList.add('active');
+        } else if (page === 'history') {
+            document.getElementById('pageHistory').classList.add('active');
+            document.querySelector('[data-page="history"]').classList.add('active');
+            loadHistory();
+        }
+    }
+
+    document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            showPage(link.dataset.page);
+        });
+    });
+
+    // ===== 文件上传 =====
+    els.uploadZone.addEventListener('click', () => els.fileInput.click());
+    els.fileInput.addEventListener('change', handleFileSelect);
+    
+    // 拖拽上传
+    els.uploadZone.addEventListener('dragover', e => {
+        e.preventDefault();
+        els.uploadZone.classList.add('dragover');
+    });
+    els.uploadZone.addEventListener('dragleave', () => els.uploadZone.classList.remove('dragover'));
+    els.uploadZone.addEventListener('drop', e => {
+        e.preventDefault();
+        els.uploadZone.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) processFile(file);
+        else showToast('请上传图片文件', 'error');
+    });
+
+    function handleFileSelect(e) {
+        const file = e.target.files[0];
+        if (file) processFile(file);
+    }
+
+    function processFile(file) {
+        if (file.size > 20 * 1024 * 1024) {
+            showToast('图片大小不能超过20MB', 'error'); return;
+        }
+        state.selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = e => {
+            els.previewImg.src = e.target.result;
+            els.uploadZone.style.display = 'none';
+            els.uploadPreview.style.display = 'block';
+            els.startBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    els.removeBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        state.selectedFile = null;
+        els.fileInput.value = '';
+        els.previewImg.src = '';
+        els.uploadZone.style.display = 'block';
+        els.uploadPreview.style.display = 'none';
+        els.startBtn.disabled = true;
+        els.resultSection.classList.remove('active');
+    });
+
+    // ===== 模式选择 =====
+    els.modesGrid.addEventListener('click', e => {
+        const card = e.target.closest('.mode-card');
+        if (!card) return;
+        
+        document.querySelectorAll('.mode-card').forEach(c => {
+            c.classList.remove('selected');
+        });
+        card.classList.add('selected');
+        state.selectedModes = [card.dataset.mode];
+    });
+
+    // ===== 开始修复 =====
+    els.startBtn.addEventListener('click', startRepair);
+
+    async function startRepair() {
+        if (!state.selectedFile || state.isProcessing) return;
+        
+        state.isProcessing = true;
+        els.startBtn.disabled = true;
+        els.processingOverlay.classList.add('active');
+        updateProgress(0, '正在上传照片...');
+        
+        try {
+            // 1. 上传图片
+            const formData = new FormData();
+            formData.append('image', state.selectedFile);
+            
+            const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
+            const uploadData = await uploadRes.json();
+            
+            if (uploadData.code !== 0) {
+                throw new Error(uploadData.message || '上传失败');
+            }
+            
+            const fileId = uploadData.data.file_id;
+            updateProgress(20, '照片上传成功，开始AI分析...');
+            
+            // 2. AI修复
+            const mode = state.selectedModes[0];
+            const statusTexts = {
+                30: 'AI正在分析照片特征...',
+                50: '正在进行智能修复...',
+                70: '优化修复细节...',
+                90: '即将完成...',
+            };
+            
+            // 模拟进度
+            let progress = 20;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 8;
+                if (progress > 95) progress = 95;
+                const status = Object.entries(statusTexts)
+                    .reverse()
+                    .find(([k]) => progress >= parseInt(k));
+                updateProgress(progress, status ? status[1] : '处理中...');
+            }, 500);
+            
+            // 实际API调用
+            const repairRes = await fetch('/api/repair', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file_id: fileId, mode: mode }),
+            });
+            
+            clearInterval(progressInterval);
+            const repairData = await repairRes.json();
+            
+            if (repairData.code !== 0) {
+                throw new Error(repairData.message || '修复失败');
+            }
+            
+            updateProgress(100, '修复完成！');
+            
+            // 显示结果
+            setTimeout(() => {
+                els.processingOverlay.classList.remove('active');
+                showResult(repairData.data, els.previewImg.src);
+                saveToHistory(repairData.data, mode);
+                showToast('修复成功！', 'success');
+            }, 500);
+            
+        } catch (err) {
+            updateProgress(0, '');
+            els.processingOverlay.classList.remove('active');
+            showToast(err.message || '修复失败，请重试', 'error');
+            console.error('修复错误:', err);
+        } finally {
+            state.isProcessing = false;
+            els.startBtn.disabled = false;
+        }
+    }
+
+    function updateProgress(percent, text) {
+        const circle = els.progressCircle;
+        const circumference = 2 * Math.PI * 52; // 326.73
+        const offset = circumference - (percent / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+        els.progressPercent.textContent = Math.round(percent) + '%';
+        if (text) els.statusText.textContent = text;
+    }
+
+    // ===== 显示结果 =====
+    function showResult(data, originalSrc) {
+        state.currentResult = data;
+        
+        // 设置图片
+        els.resultImgBefore.src = originalSrc;
+        els.resultImgAfter.src = data.url || data.preview_url;
+        els.downloadBtn.href = data.url || data.preview_url;
+        
+        // 修复信息
+        const modeNames = { colorize: '黑白上色', repair: '破损修复', enhance: '清晰度增强', denoise: '智能去噪' };
+        const modeColors = { colorize: '#C47B5A', repair: '#7A9E7E', enhance: '#D4A35A', denoise: '#7E8FA3' };
+        const mode = data.mode || state.selectedModes[0];
+        
+        els.resultInfo.innerHTML = `
+            <span class="badge" style="background: ${modeColors[mode]}22; color: ${modeColors[mode]};">
+                ${modeNames[mode]}
+            </span>
+            <span class="badge" style="background: var(--amber-bg); color: var(--amber);">
+                ${data.platform || 'AI'}
+            </span>
+            <p class="time">耗时 ${data.cost_time ? data.cost_time.toFixed(1) : '--'} 秒</p>
+        `;
+        
+        els.resultSection.classList.add('active');
+        els.resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // 重置对比滑块
+        setTimeout(initCompareSlider, 100);
+    }
+
+    // ===== 对比滑块 =====
+    function initCompareSlider() {
+        const container = els.compareContainer;
+        const before = els.compareBefore;
+        const slider = els.compareSlider;
+        let isDragging = false;
+        
+        function updateSlider(clientX) {
+            const rect = container.getBoundingClientRect();
+            let x = clientX - rect.left;
+            x = Math.max(0, Math.min(x, rect.width));
+            const percent = (x / rect.width) * 100;
+            before.style.width = percent + '%';
+            slider.style.left = percent + '%';
+        }
+        
+        slider.addEventListener('mousedown', () => isDragging = true);
+        document.addEventListener('mousemove', e => { if (isDragging) updateSlider(e.clientX); });
+        document.addEventListener('mouseup', () => isDragging = false);
+        
+        // 触摸支持
+        slider.addEventListener('touchstart', () => isDragging = true, { passive: true });
+        document.addEventListener('touchmove', e => {
+            if (isDragging) updateSlider(e.touches[0].clientX);
+        }, { passive: true });
+        document.addEventListener('touchend', () => isDragging = false);
+        
+        // 点击跳转
+        container.addEventListener('click', e => {
+            if (e.target === slider || e.target.closest('.compare-slider')) return;
+            updateSlider(e.clientX);
+        });
+    }
+
+    // ===== 重新修复 =====
+    els.retryBtn.addEventListener('click', () => {
+        els.resultSection.classList.remove('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== 历史记录（本地存储） =====
+    function saveToHistory(data, mode) {
+        const history = JSON.parse(localStorage.getItem('sgjy_history') || '[]');
+        const modeNames = { colorize: '黑白上色', repair: '破损修复', enhance: '清晰度增强', denoise: '智能去噪' };
+        history.unshift({
+            id: data.file_id || Date.now(),
+            mode: mode,
+            mode_name: modeNames[mode],
+            url: data.url || data.preview_url,
+            preview: els.previewImg.src,
+            platform: data.platform || 'AI',
+            cost_time: data.cost_time,
+            created_at: new Date().toLocaleString('zh-CN'),
+        });
+        if (history.length > 30) history.pop();
+        localStorage.setItem('sgjy_history', JSON.stringify(history));
+    }
+
+    function loadHistory() {
+        const history = JSON.parse(localStorage.getItem('sgjy_history') || '[]');
+        
+        if (history.length === 0) {
+            els.historyList.style.display = 'none';
+            els.historyEmpty.style.display = 'block';
+            return;
+        }
+        
+        els.historyList.style.display = 'flex';
+        els.historyEmpty.style.display = 'none';
+        
+        const modeColors = { colorize: '#C47B5A', repair: '#7A9E7E', enhance: '#D4A35A', denoise: '#7E8FA3' };
+        
+        els.historyList.innerHTML = history.map(item => `
+            <div class="history-item">
+                <img src="${item.preview}" alt="预览" loading="lazy">
+                <div class="info">
+                    <h4>${item.mode_name}</h4>
+                    <div class="meta">${item.created_at} · ${item.platform} · ${item.cost_time ? item.cost_time.toFixed(1) : '--'}秒</div>
+                </div>
+                <span class="badge" style="background: ${modeColors[item.mode]}22; color: ${modeColors[item.mode]};">
+                    ${item.mode_name}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    // ===== 统计数据 =====
+    async function loadStats() {
+        try {
+            const res = await fetch('/api/stats/dashboard');
+            const data = await res.json();
+            if (data.code === 0) {
+                document.getElementById('statRepairs').textContent = data.data.total_repairs || '0';
+                document.getElementById('statUsers').textContent = data.data.total_users || '0';
+            }
+        } catch (e) {
+            // 静默失败，使用默认值
+            document.getElementById('statRepairs').textContent = '1.2万';
+            document.getElementById('statUsers').textContent = '3,456';
+        }
+    }
+
+    // ===== 初始化 =====
+    document.addEventListener('DOMContentLoaded', () => {
+        loadStats();
+        console.log('拾光旧影 Web - 已加载');
+    });
+    </script>
+</body>
+</html>

@@ -41,6 +41,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'core.middleware.ExemptCSRFMiddleware',  # 自定义CSRF豁免中间件
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -168,6 +169,12 @@ CORS_ALLOW_HEADERS = [
 CORS_EXPOSE_HEADERS = ['*']
 
 # ─────────────────────────────────────────────
+# CSRF配置
+# ─────────────────────────────────────────────
+
+CSRF_TRUSTED_ORIGINS = ['*']
+
+# ─────────────────────────────────────────────
 # 微信配置
 # ─────────────────────────────────────────────
 
@@ -188,6 +195,19 @@ JWT_EXPIRE_HOURS = 24 * 7  # Token有效期7天
 
 BAIDU_APP_KEY = os.getenv('BAIDU_APP_KEY', '')
 BAIDU_APP_SECRET = os.getenv('BAIDU_APP_SECRET', '')
+
+# ─────────────────────────────────────────────
+# 腾讯云配置
+# ─────────────────────────────────────────────
+
+TENCENT_SECRET_ID = os.getenv('TENCENT_SECRET_ID', '')
+TENCENT_SECRET_KEY = os.getenv('TENCENT_SECRET_KEY', '')
+
+# ─────────────────────────────────────────────
+# Replicate配置
+# ─────────────────────────────────────────────
+
+REPLICATE_API_TOKEN = os.getenv('REPLICATE_API_TOKEN', '')
 
 # ─────────────────────────────────────────────
 # 免费额度配置

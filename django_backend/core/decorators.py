@@ -3,6 +3,7 @@
 提供登录认证、权限检查等装饰器
 """
 import functools
+import time
 import logging
 from django.http import JsonResponse
 from django.conf import settings
@@ -69,12 +70,42 @@ def login_required(view_func):
 def admin_required(view_func):
     """
     管理员权限装饰器
-    要求用户已登录且是管理员
-    用法: @admin_required (需要先使用 @login_required 或直接单独使用)
+    支持两种认证方式：
+    1. X-Admin-Token 请求头（管理后台专用）
+    2. Authorization 请求头（JWT认证）
+    用法: @admin_required
     """
     @functools.wraps(view_func)
     def wrapper(request, *args, **kwargs):
-        # 从请求头获取 Token
+        # 优先检查 X-Admin-Token（管理后台专用token）
+        admin_token = request.META.get('HTTP_X_ADMIN_TOKEN', '')
+        
+        if admin_token:
+            # 使用管理后台的token验证机制
+            from admin_portal.views import ADMIN_TOKENS, ADMIN_ACCOUNTS
+            token_info = ADMIN_TOKENS.get(admin_token, {})
+            
+            # 检查token是否存在且未过期
+            if not token_info or time.time() > token_info.get('expire_time', 0):
+                return error_response("登录已过期，请重新登录", code=401, status=401)
+            
+            username = token_info.get('username', '')
+            admin = ADMIN_ACCOUNTS.get(username, {})
+            
+            if not admin:
+                return error_response("无效的管理员账号", code=401, status=401)
+            
+            # 将管理员信息附加到 request
+            request.user_info = {
+                'username': username,
+                'role': token_info.get('role', ''),
+                'name': admin.get('name', ''),
+                'is_admin': True,
+            }
+            
+            return view_func(request, *args, **kwargs)
+        
+        # 如果没有 X-Admin-Token，则尝试 JWT 认证
         auth_header = request.META.get('HTTP_AUTHORIZATION', '')
         
         if not auth_header:

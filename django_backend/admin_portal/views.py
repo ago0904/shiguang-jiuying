@@ -472,6 +472,7 @@ def get_settings(request):
     Header: X-Admin-Token: <token>
     """
     from django.conf import settings as django_settings
+    from api.models import PlatformConfig
     
     system_settings = {
         "free_daily_limit": getattr(django_settings, 'FREE_DAILY_LIMIT', 3),
@@ -484,6 +485,25 @@ def get_settings(request):
         "system_notice": getattr(django_settings, 'SYSTEM_NOTICE', ''),
         "wechat_appid": getattr(django_settings, 'WECHAT_APPID', ''),
     }
+    
+    # 从数据库获取平台配置的启用状态
+    try:
+        baidu_config = PlatformConfig.objects.get(platform='baidu')
+        system_settings['baidu_enabled'] = baidu_config.is_enabled
+    except PlatformConfig.DoesNotExist:
+        system_settings['baidu_enabled'] = True
+    
+    try:
+        tencent_config = PlatformConfig.objects.get(platform='tencent')
+        system_settings['tencent_enabled'] = tencent_config.is_enabled
+    except PlatformConfig.DoesNotExist:
+        system_settings['tencent_enabled'] = True
+    
+    try:
+        replicate_config = PlatformConfig.objects.get(platform='replicate')
+        system_settings['replicate_enabled'] = replicate_config.is_enabled
+    except PlatformConfig.DoesNotExist:
+        system_settings['replicate_enabled'] = True
     
     return json_response(data=system_settings)
 
@@ -562,3 +582,83 @@ def get_quota(request):
     }
     
     return json_response(data=platform_quota)
+
+
+# ============================================================
+# 平台配置API
+# ============================================================
+
+@require_GET
+@admin_required
+def get_platform_configs(request):
+    """获取所有平台配置
+    
+    GET /admin/api/platform-configs
+    Header: X-Admin-Token: <token>
+    """
+    from api.models import PlatformConfig
+    
+    configs = PlatformConfig.objects.all()
+    config_list = [config.to_dict() for config in configs]
+    
+    # 如果数据库中没有配置，返回默认空配置
+    if not config_list:
+        default_platforms = ['baidu', 'tencent', 'replicate']
+        for platform in default_platforms:
+            config_list.append({
+                'platform': platform,
+                'platform_name': dict(PlatformConfig.PLATFORM_CHOICES).get(platform, platform),
+                'api_key': '',
+                'api_secret': '',
+                'extra_config': {},
+                'is_enabled': True,
+                'remark': '',
+            })
+    
+    return json_response(data=config_list)
+
+
+@csrf_exempt
+@require_POST
+@admin_required
+def update_platform_config(request, platform):
+    """更新指定平台的配置
+    
+    POST /admin/api/platform-configs/<platform>
+    Body: {"api_key": "xxx", "api_secret": "xxx", "is_enabled": true, ...}
+    Header: X-Admin-Token: <token>
+    """
+    import json
+    from api.models import PlatformConfig
+    
+    try:
+        body = json.loads(request.body)
+    except json.JSONDecodeError:
+        return error_response("请求格式错误", code=400)
+    
+    # 验证平台类型
+    valid_platforms = dict(PlatformConfig.PLATFORM_CHOICES)
+    if platform not in valid_platforms:
+        return error_response(f"无效的平台类型: {platform}", code=400)
+    
+    # 获取或创建配置
+    config, created = PlatformConfig.objects.get_or_create(platform=platform)
+    
+    # 更新字段
+    if 'api_key' in body:
+        config.api_key = body['api_key']
+    if 'api_secret' in body:
+        config.api_secret = body['api_secret']
+    if 'is_enabled' in body:
+        config.is_enabled = body['is_enabled']
+    if 'remark' in body:
+        config.remark = body['remark']
+    if 'extra_config' in body:
+        import json as json_module
+        config.extra_config = json_module.dumps(body['extra_config'])
+    
+    config.save()
+    
+    action = "创建" if created else "更新"
+    logger.info(f"平台配置已{action}: platform={platform}")
+    return json_response(message=f"配置已{action}成功", data=config.to_dict())

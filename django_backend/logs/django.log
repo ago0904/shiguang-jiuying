@@ -1,0 +1,408 @@
+2026-05-12 16:25:32,210 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:28:17,461 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:28:33,253 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:28:33,790 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 95238
+2026-05-12 16:28:36,564 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:36,564 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:36,565 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:28:37,086 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:28:37,086 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:28:37,086 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:28:50,160 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:50,160 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:50,160 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:28:50,673 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:28:50,674 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:28:50,674 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:28:56,616 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:56,616 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:56,617 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:28:57,134 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:28:57,134 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:28:57,135 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:29:16,786 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:29:17,308 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 95238
+2026-05-12 16:29:23,220 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:29:23,220 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:29:23,220 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:29:23,738 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:29:23,738 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:29:23,739 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:30:57,675 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:30:58,686 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:31:02,199 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:31:03,276 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:31:15,331 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:31:43,601 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:43,601 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:43,602 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:31:57,938 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:57,938 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:57,939 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:32:21,826 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:32:54,445 [INFO] django.server: "GET /admin HTTP/1.1" 301 0
+2026-05-12 16:32:54,453 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 95238
+2026-05-12 16:32:57,837 [WARNING] django.request: Not Found: /favicon.ico
+2026-05-12 16:32:57,837 [WARNING] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+2026-05-12 16:32:59,377 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:32:59,377 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:32:59,378 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:32:59,992 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:33:02,748 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:33:04,131 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:33:04,991 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:33:05,585 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:33:21,111 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:33:35,112 [INFO] django.server: - Broken pipe from ('127.0.0.1', 57138)
+
+2026-05-12 16:33:45,153 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:33:49,384 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:33:56,938 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:35:01,378 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:35:02,535 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:35:28,042 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:35:38,999 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\models.py changed, reloading.
+2026-05-12 16:35:40,017 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:35:52,028 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\admin.py changed, reloading.
+2026-05-12 16:35:53,268 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:35:58,045 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:35:58,045 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:35:58,046 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 98
+2026-05-12 16:36:07,562 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\admin.py changed, reloading.
+2026-05-12 16:36:08,506 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:36:46,239 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\views.py changed, reloading.
+2026-05-12 16:36:47,212 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:36:58,206 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\urls.py changed, reloading.
+2026-05-12 16:36:59,113 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:37:59,614 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:37:59,614 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:37:59,614 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:38:00,295 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:38:01,949 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:38:05,830 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:38:07,162 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:38:07,952 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:38:52,650 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:38:54,890 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:38:56,400 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:39:01,840 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:39:03,492 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:40:01,502 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:40:02,455 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:40:04,880 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:40:05,866 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:40:11,868 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105636
+2026-05-12 16:40:11,921 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:40:11,922 [WARNING] django.request: Unauthorized: /admin/api/check
+2026-05-12 16:40:11,922 [WARNING] django.server: "GET /admin/api/check HTTP/1.1" 401 98
+2026-05-12 16:40:11,925 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:40:11,926 [WARNING] django.request: Unauthorized: /admin/api/check
+2026-05-12 16:40:11,927 [WARNING] django.server: "GET /admin/api/check HTTP/1.1" 401 98
+2026-05-12 16:40:13,211 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,212 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,211 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,212 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,213 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:40:13,213 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:40:13,851 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:40:13,858 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:40:16,257 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:40:17,052 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:40:17,852 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:40:18,456 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:40:18,469 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 498
+2026-05-12 16:41:00,365 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105316
+2026-05-12 16:41:00,419 [INFO] django.server: "GET /admin/api/check HTTP/1.1" 200 163
+2026-05-12 16:41:00,444 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:41:01,400 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105316
+2026-05-12 16:41:01,445 [INFO] django.server: "GET /admin/api/check HTTP/1.1" 200 163
+2026-05-12 16:41:01,467 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:41:02,179 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:41:02,190 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 498
+2026-05-12 16:41:19,715 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:41:20,619 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:41:31,760 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:41:31,760 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:41:54,161 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\views.py changed, reloading.
+2026-05-12 16:41:55,503 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:43:16,646 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:43:16,647 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:43:32,567 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:43:32,568 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:44:10,382 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:44:10,383 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:47:12,076 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:47:13,404 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:29,824 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:47:32,377 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:34,963 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\views.py changed, reloading.
+2026-05-12 16:47:36,192 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:38,773 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\admin.py changed, reloading.
+2026-05-12 16:47:40,553 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:46,463 [WARNING] django.request: Method Not Allowed (POST): /admin/api/settings
+2026-05-12 16:47:46,464 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 405 0
+2026-05-12 16:48:02,001 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:48:03,002 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:48:06,838 [WARNING] django.request: Method Not Allowed (POST): /admin/api/settings
+2026-05-12 16:48:06,839 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 405 0
+2026-05-12 16:48:31,361 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:48:34,073 [WARNING] django.request: Method Not Allowed (POST): /admin/api/settings
+2026-05-12 16:48:34,074 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 405 0
+2026-05-12 16:49:55,342 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105356
+2026-05-12 16:49:55,379 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:49:55,379 [WARNING] django.request: Unauthorized: /admin/api/check
+2026-05-12 16:49:55,380 [WARNING] django.server: "GET /admin/api/check HTTP/1.1" 401 98
+2026-05-12 16:49:57,113 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:49:57,113 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:49:57,114 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:49:57,754 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:50:05,901 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 400
+2026-05-12 16:50:05,915 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 877
+2026-05-12 16:50:08,761 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:08,761 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:08,762 [INFO] django.server: "POST /admin/api/settings/update HTTP/1.1" 200 78
+2026-05-12 16:50:08,779 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:08,779 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:08,779 [INFO] django.server: "POST /admin/api/platform-configs/baidu HTTP/1.1" 200 351
+2026-05-12 16:50:08,786 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:08,786 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:08,786 [INFO] django.server: "POST /admin/api/platform-configs/tencent HTTP/1.1" 200 352
+2026-05-12 16:50:08,795 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:08,795 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:08,796 [INFO] django.server: "POST /admin/api/platform-configs/replicate HTTP/1.1" 200 341
+2026-05-12 16:50:18,748 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:18,748 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:18,749 [INFO] django.server: "POST /admin/api/settings/update HTTP/1.1" 200 78
+2026-05-12 16:50:18,757 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:18,757 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:18,757 [INFO] django.server: "POST /admin/api/platform-configs/baidu HTTP/1.1" 200 407
+2026-05-12 16:50:18,765 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:18,765 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:18,766 [INFO] django.server: "POST /admin/api/platform-configs/tencent HTTP/1.1" 200 352
+2026-05-12 16:50:18,773 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:18,773 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:18,773 [INFO] django.server: "POST /admin/api/platform-configs/replicate HTTP/1.1" 200 341
+2026-05-12 16:50:21,280 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:50:24,699 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 400
+2026-05-12 16:50:24,713 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 933
+2026-05-12 16:50:30,463 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:30,463 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:30,464 [INFO] django.server: "POST /admin/api/settings/update HTTP/1.1" 200 78
+2026-05-12 16:50:30,476 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:30,476 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:30,477 [INFO] django.server: "POST /admin/api/platform-configs/baidu HTTP/1.1" 200 407
+2026-05-12 16:50:30,483 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:30,483 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:30,484 [INFO] django.server: "POST /admin/api/platform-configs/tencent HTTP/1.1" 200 352
+2026-05-12 16:50:30,489 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:30,489 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:30,490 [INFO] django.server: "POST /admin/api/platform-configs/replicate HTTP/1.1" 200 341
+2026-05-12 16:50:33,095 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:50:34,295 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 400
+2026-05-12 16:50:34,302 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 933
+2026-05-12 17:12:22,126 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\models.py changed, reloading.
+2026-05-12 17:12:23,217 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:25:32,210 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:28:17,461 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:28:33,253 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:28:33,790 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 95238
+2026-05-12 16:28:36,564 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:36,564 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:36,565 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:28:37,086 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:28:37,086 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:28:37,086 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:28:50,160 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:50,160 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:50,160 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:28:50,673 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:28:50,674 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:28:50,674 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:28:56,616 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:56,616 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:28:56,617 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:28:57,134 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:28:57,134 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:28:57,135 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:29:16,786 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:29:17,308 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 95238
+2026-05-12 16:29:23,220 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:29:23,220 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:29:23,220 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:29:23,738 [ERROR] api: [ErrorResponse] code=401, message=请先登录
+2026-05-12 16:29:23,738 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:29:23,739 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 77
+2026-05-12 16:30:57,675 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:30:58,686 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:31:02,199 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:31:03,276 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:31:15,331 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:31:43,601 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:43,601 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:43,602 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:31:57,938 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:57,938 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:31:57,939 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:32:21,826 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:32:54,445 [INFO] django.server: "GET /admin HTTP/1.1" 301 0
+2026-05-12 16:32:54,453 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 95238
+2026-05-12 16:32:57,837 [WARNING] django.request: Not Found: /favicon.ico
+2026-05-12 16:32:57,837 [WARNING] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+2026-05-12 16:32:59,377 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:32:59,377 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:32:59,378 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:32:59,992 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:33:02,748 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:33:04,131 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:33:04,991 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:33:05,585 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:33:21,111 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:33:35,112 [INFO] django.server: - Broken pipe from ('127.0.0.1', 57138)
+
+2026-05-12 16:33:45,153 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:33:49,384 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:33:56,938 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:35:01,378 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:35:02,535 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:35:28,042 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:35:38,999 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\models.py changed, reloading.
+2026-05-12 16:35:40,017 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:35:52,028 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\admin.py changed, reloading.
+2026-05-12 16:35:53,268 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:35:58,045 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:35:58,045 [WARNING] django.request: Unauthorized: /admin/api/dashboard
+2026-05-12 16:35:58,046 [WARNING] django.server: "GET /admin/api/dashboard HTTP/1.1" 401 98
+2026-05-12 16:36:07,562 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\admin.py changed, reloading.
+2026-05-12 16:36:08,506 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:36:46,239 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\views.py changed, reloading.
+2026-05-12 16:36:47,212 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:36:58,206 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\urls.py changed, reloading.
+2026-05-12 16:36:59,113 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:37:59,614 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:37:59,614 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:37:59,614 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:38:00,295 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:38:01,949 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:38:05,830 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:38:07,162 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:38:07,952 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:38:52,650 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:38:54,890 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:38:56,400 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:39:01,840 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:39:03,492 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:40:01,502 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:40:02,455 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:40:04,880 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\core\decorators.py changed, reloading.
+2026-05-12 16:40:05,866 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:40:11,868 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105636
+2026-05-12 16:40:11,921 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:40:11,922 [WARNING] django.request: Unauthorized: /admin/api/check
+2026-05-12 16:40:11,922 [WARNING] django.server: "GET /admin/api/check HTTP/1.1" 401 98
+2026-05-12 16:40:11,925 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:40:11,926 [WARNING] django.request: Unauthorized: /admin/api/check
+2026-05-12 16:40:11,927 [WARNING] django.server: "GET /admin/api/check HTTP/1.1" 401 98
+2026-05-12 16:40:13,211 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,212 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,211 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,212 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:40:13,213 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:40:13,213 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:40:13,851 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:40:13,858 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:40:16,257 [INFO] django.server: "GET /admin/api/records?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:40:17,052 [INFO] django.server: "GET /admin/api/users?page=1&limit=20 HTTP/1.1" 200 133
+2026-05-12 16:40:17,852 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:40:18,456 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:40:18,469 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 498
+2026-05-12 16:41:00,365 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105316
+2026-05-12 16:41:00,419 [INFO] django.server: "GET /admin/api/check HTTP/1.1" 200 163
+2026-05-12 16:41:00,444 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:41:01,400 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105316
+2026-05-12 16:41:01,445 [INFO] django.server: "GET /admin/api/check HTTP/1.1" 200 163
+2026-05-12 16:41:01,467 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:41:02,179 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 325
+2026-05-12 16:41:02,190 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 498
+2026-05-12 16:41:19,715 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:41:20,619 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:41:31,760 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:41:31,760 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:41:54,161 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\views.py changed, reloading.
+2026-05-12 16:41:55,503 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:43:16,646 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:43:16,647 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:43:32,567 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:43:32,568 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:44:10,382 [WARNING] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /admin/api/settings
+2026-05-12 16:44:10,383 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 403 1016
+2026-05-12 16:47:12,076 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:47:13,404 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:29,824 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:47:32,377 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:34,963 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\admin_portal\views.py changed, reloading.
+2026-05-12 16:47:36,192 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:38,773 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\admin.py changed, reloading.
+2026-05-12 16:47:40,553 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:47:46,463 [WARNING] django.request: Method Not Allowed (POST): /admin/api/settings
+2026-05-12 16:47:46,464 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 405 0
+2026-05-12 16:48:02,001 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\shiguang\settings.py changed, reloading.
+2026-05-12 16:48:03,002 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:48:06,838 [WARNING] django.request: Method Not Allowed (POST): /admin/api/settings
+2026-05-12 16:48:06,839 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 405 0
+2026-05-12 16:48:31,361 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-05-12 16:48:34,073 [WARNING] django.request: Method Not Allowed (POST): /admin/api/settings
+2026-05-12 16:48:34,074 [WARNING] django.server: "POST /admin/api/settings HTTP/1.1" 405 0
+2026-05-12 16:49:55,342 [INFO] django.server: "GET /admin/ HTTP/1.1" 200 105356
+2026-05-12 16:49:55,379 [ERROR] api: [ErrorResponse] code=401, message=登录已过期，请重新登录
+2026-05-12 16:49:55,379 [WARNING] django.request: Unauthorized: /admin/api/check
+2026-05-12 16:49:55,380 [WARNING] django.server: "GET /admin/api/check HTTP/1.1" 401 98
+2026-05-12 16:49:57,113 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:49:57,113 [INFO] admin_portal.views: 管理员登录成功: username=admin
+2026-05-12 16:49:57,114 [INFO] django.server: "POST /admin/api/login HTTP/1.1" 200 208
+2026-05-12 16:49:57,754 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:50:05,901 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 400
+2026-05-12 16:50:05,915 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 877
+2026-05-12 16:50:08,761 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:08,761 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:08,762 [INFO] django.server: "POST /admin/api/settings/update HTTP/1.1" 200 78
+2026-05-12 16:50:08,779 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:08,779 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:08,779 [INFO] django.server: "POST /admin/api/platform-configs/baidu HTTP/1.1" 200 351
+2026-05-12 16:50:08,786 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:08,786 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:08,786 [INFO] django.server: "POST /admin/api/platform-configs/tencent HTTP/1.1" 200 352
+2026-05-12 16:50:08,795 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:08,795 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:08,796 [INFO] django.server: "POST /admin/api/platform-configs/replicate HTTP/1.1" 200 341
+2026-05-12 16:50:18,748 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:18,748 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:18,749 [INFO] django.server: "POST /admin/api/settings/update HTTP/1.1" 200 78
+2026-05-12 16:50:18,757 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:18,757 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:18,757 [INFO] django.server: "POST /admin/api/platform-configs/baidu HTTP/1.1" 200 407
+2026-05-12 16:50:18,765 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:18,765 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:18,766 [INFO] django.server: "POST /admin/api/platform-configs/tencent HTTP/1.1" 200 352
+2026-05-12 16:50:18,773 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:18,773 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:18,773 [INFO] django.server: "POST /admin/api/platform-configs/replicate HTTP/1.1" 200 341
+2026-05-12 16:50:21,280 [INFO] django.server: "GET /admin/api/dashboard HTTP/1.1" 200 441
+2026-05-12 16:50:24,699 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 400
+2026-05-12 16:50:24,713 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 933
+2026-05-12 16:50:30,463 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:30,463 [INFO] admin_portal.views: 系统设置已更新: ['free_daily_limit', 'member_price_monthly', 'member_price_quarterly', 'member_price_yearly', 'member_daily_limit', 'max_image_size', 'support_email', 'system_notice']
+2026-05-12 16:50:30,464 [INFO] django.server: "POST /admin/api/settings/update HTTP/1.1" 200 78
+2026-05-12 16:50:30,476 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:30,476 [INFO] admin_portal.views: 平台配置已更新: platform=baidu
+2026-05-12 16:50:30,477 [INFO] django.server: "POST /admin/api/platform-configs/baidu HTTP/1.1" 200 407
+2026-05-12 16:50:30,483 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:30,483 [INFO] admin_portal.views: 平台配置已更新: platform=tencent
+2026-05-12 16:50:30,484 [INFO] django.server: "POST /admin/api/platform-configs/tencent HTTP/1.1" 200 352
+2026-05-12 16:50:30,489 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:30,489 [INFO] admin_portal.views: 平台配置已更新: platform=replicate
+2026-05-12 16:50:30,490 [INFO] django.server: "POST /admin/api/platform-configs/replicate HTTP/1.1" 200 341
+2026-05-12 16:50:33,095 [INFO] django.server: "GET /admin/api/quota HTTP/1.1" 200 441
+2026-05-12 16:50:34,295 [INFO] django.server: "GET /admin/api/settings HTTP/1.1" 200 400
+2026-05-12 16:50:34,302 [INFO] django.server: "GET /admin/api/platform-configs HTTP/1.1" 200 933
+2026-05-12 17:12:22,126 [INFO] django.utils.autoreload: E:\project\shiguang-jiuying\django_backend\api\models.py changed, reloading.
+2026-05-12 17:12:23,217 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

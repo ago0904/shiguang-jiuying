@@ -2,7 +2,7 @@
 修复记录 - Django Admin 配置
 """
 from django.contrib import admin
-from .models import RepairRecord
+from .models import RepairRecord, PlatformConfig
 
 
 @admin.register(RepairRecord)
@@ -59,3 +59,31 @@ class RepairRecordAdmin(admin.ModelAdmin):
         """显示耗时"""
         return f"{obj.cost_time:.2f}s"
     cost_time_display.short_description = '耗时'
+
+
+@admin.register(PlatformConfig)
+class PlatformConfigAdmin(admin.ModelAdmin):
+    """平台配置管理后台"""
+    list_display = ['platform', 'platform_name', 'is_enabled', 'updated_at']
+    list_filter = ['platform', 'is_enabled']
+    search_fields = ['platform', 'remark']
+    ordering = ['platform']
+    
+    fieldsets = (
+        ('平台信息', {
+            'fields': ('platform', 'is_enabled', 'remark')
+        }),
+        ('API 配置', {
+            'fields': ('api_key', 'api_secret'),
+            'classes': ('collapse',)
+        }),
+        ('额外配置', {
+            'fields': ('extra_config',),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def platform_name(self, obj):
+        """显示平台名称"""
+        return obj.get_platform_display()
+    platform_name.short_description = '平台名称'

@@ -36,4 +36,8 @@ urlpatterns = [
     
     # 配额管理API
     path('api/quota', views.get_quota, name='admin_quota'),
+    
+    # 平台配置API
+    path('api/platform-configs', views.get_platform_configs, name='admin_get_platform_configs'),
+    path('api/platform-configs/<str:platform>', views.update_platform_config, name='admin_update_platform_config'),
 ]

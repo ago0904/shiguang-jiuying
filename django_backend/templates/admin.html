@@ -1487,6 +1487,107 @@
                         </div>
                     </div>
 
+                    <!-- AI平台配置 -->
+                    <div class="settings-card full-width">
+                        <div class="settings-title">&#129302; AI平台配置</div>
+                        <div class="settings-form">
+                            <!-- 百度AI -->
+                            <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color);">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <span style="font-size: 24px;">&#128255;</span>
+                                        <div>
+                                            <div style="font-weight: 600;">百度AI</div>
+                                            <div style="font-size: 12px; color: var(--text-muted);">黑白上色、照片修复等功能</div>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-switch on" id="toggleBaiduEnabled" onclick="toggleSwitch(this)"></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">API Key (App Key)</span>
+                                        <span class="form-hint">在百度智能云控制台获取</span>
+                                    </div>
+                                    <input type="password" class="form-input-md" id="baiduApiKey" placeholder="请输入API Key">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">API Secret (Secret Key)</span>
+                                        <span class="form-hint">在百度智能云控制台获取</span>
+                                    </div>
+                                    <input type="password" class="form-input-md" id="baiduApiSecret" placeholder="请输入API Secret">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">备注</span>
+                                    </div>
+                                    <input type="text" class="form-input-md" id="baiduRemark" placeholder="可选">
+                                </div>
+                            </div>
+
+                            <!-- 腾讯云 -->
+                            <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color);">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <span style="font-size: 24px;">&#9729;&#65039;</span>
+                                        <div>
+                                            <div style="font-weight: 600;">腾讯云</div>
+                                            <div style="font-size: 12px; color: var(--text-muted);">清晰度增强、去噪等功能</div>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-switch on" id="toggleTencentEnabled" onclick="toggleSwitch(this)"></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">SecretId</span>
+                                        <span class="form-hint">在腾讯云控制台获取</span>
+                                    </div>
+                                    <input type="password" class="form-input-md" id="tencentApiKey" placeholder="请输入SecretId">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">SecretKey</span>
+                                        <span class="form-hint">在腾讯云控制台获取</span>
+                                    </div>
+                                    <input type="password" class="form-input-md" id="tencentApiSecret" placeholder="请输入SecretKey">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">备注</span>
+                                    </div>
+                                    <input type="text" class="form-input-md" id="tencentRemark" placeholder="可选">
+                                </div>
+                            </div>
+
+                            <!-- Replicate -->
+                            <div>
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <span style="font-size: 24px;">&#128640;</span>
+                                        <div>
+                                            <div style="font-weight: 600;">Replicate</div>
+                                            <div style="font-size: 12px; color: var(--text-muted);">高级AI模型服务</div>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-switch on" id="toggleReplicateEnabled" onclick="toggleSwitch(this)"></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">API Token</span>
+                                        <span class="form-hint">在replicate.com获取</span>
+                                    </div>
+                                    <input type="password" class="form-input-md" id="replicateApiKey" placeholder="请输入API Token">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-label-group">
+                                        <span class="form-label">备注</span>
+                                    </div>
+                                    <input type="text" class="form-input-md" id="replicateRemark" placeholder="可选">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- 保存按钮 -->
                     <div class="settings-card full-width" style="text-align: center; padding: 32px;">
                         <button class="btn-success" onclick="saveSettings()" id="saveSettingsBtn">&#128190; 保存设置</button>
@@ -1549,18 +1650,6 @@ const PLATFORM_ICONS = {
 const MODE_NAMES = {
     colorize: '上色', repair: '修复', enhance: '增强', denoise: '去噪'
 };
-
-// ============================================================
-// 初始化
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-    if (adminToken) {
-        checkAuth();
-    }
-    setupLoginForm();
-    setupSidebar();
-    setupAutoRefresh();
-});
 
 // ============================================================
 // API 请求封装
@@ -2229,6 +2318,43 @@ async function loadSettings() {
     setToggle('toggleRepair', s.repair_enabled);
     setToggle('toggleEnhance', s.enhance_enabled);
     setToggle('toggleDenoise', s.denoise_enabled);
+
+    // 加载平台配置（包括启用状态和密钥）
+    loadPlatformConfigs();
+}
+
+async function loadPlatformConfigs() {
+    const result = await apiRequest(`${API_BASE}/platform-configs`);
+    if (!result || !result.data) return;
+
+    const configs = result.data;
+    const configMap = {};
+    configs.forEach(c => {
+        configMap[c.platform] = c;
+    });
+
+    // 百度AI
+    if (configMap.baidu) {
+        document.getElementById('baiduApiKey').value = configMap.baidu.api_key || '';
+        document.getElementById('baiduApiSecret').value = configMap.baidu.api_secret || '';
+        document.getElementById('baiduRemark').value = configMap.baidu.remark || '';
+        setToggle('toggleBaiduEnabled', configMap.baidu.is_enabled);
+    }
+
+    // 腾讯云
+    if (configMap.tencent) {
+        document.getElementById('tencentApiKey').value = configMap.tencent.api_key || '';
+        document.getElementById('tencentApiSecret').value = configMap.tencent.api_secret || '';
+        document.getElementById('tencentRemark').value = configMap.tencent.remark || '';
+        setToggle('toggleTencentEnabled', configMap.tencent.is_enabled);
+    }
+
+    // Replicate
+    if (configMap.replicate) {
+        document.getElementById('replicateApiKey').value = configMap.replicate.api_key || '';
+        document.getElementById('replicateRemark').value = configMap.replicate.remark || '';
+        setToggle('toggleReplicateEnabled', configMap.replicate.is_enabled);
+    }
 }
 
 async function saveSettings() {
@@ -2236,6 +2362,7 @@ async function saveSettings() {
     btn.disabled = true;
     btn.textContent = '保存中...';
 
+    // 保存系统设置
     const settings = {
         free_daily_limit: parseInt(document.getElementById('settingFreeLimit').value) || 3,
         member_daily_limit: parseInt(document.getElementById('settingMemberLimit').value) || 50,
@@ -2255,16 +2382,51 @@ async function saveSettings() {
         denoise_enabled: document.getElementById('toggleDenoise').classList.contains('on')
     };
 
-    const result = await apiRequest(`${API_BASE}/settings`, {
+    const result = await apiRequest(`${API_BASE}/settings/update`, {
         method: 'POST',
         body: JSON.stringify(settings)
     });
 
+    if (result) {
+        // 保存平台配置
+        await savePlatformConfigs();
+        showToast('设置已保存', 'success');
+    }
+
     btn.disabled = false;
     btn.innerHTML = '&#128190; 保存设置';
+}
 
-    if (result) {
-        showToast('设置已保存', 'success');
+async function savePlatformConfigs() {
+    const platforms = [
+        {
+            platform: 'baidu',
+            api_key: document.getElementById('baiduApiKey').value,
+            api_secret: document.getElementById('baiduApiSecret').value,
+            is_enabled: document.getElementById('toggleBaiduEnabled').classList.contains('on'),
+            remark: document.getElementById('baiduRemark').value
+        },
+        {
+            platform: 'tencent',
+            api_key: document.getElementById('tencentApiKey').value,
+            api_secret: document.getElementById('tencentApiSecret').value,
+            is_enabled: document.getElementById('toggleTencentEnabled').classList.contains('on'),
+            remark: document.getElementById('tencentRemark').value
+        },
+        {
+            platform: 'replicate',
+            api_key: document.getElementById('replicateApiKey').value,
+            api_secret: '',
+            is_enabled: document.getElementById('toggleReplicateEnabled').classList.contains('on'),
+            remark: document.getElementById('replicateRemark').value
+        }
+    ];
+
+    for (const platform of platforms) {
+        await apiRequest(`${API_BASE}/platform-configs/${platform.platform}`, {
+            method: 'POST',
+            body: JSON.stringify(platform)
+        });
     }
 }
 
@@ -2377,6 +2539,18 @@ function setupAutoRefresh() {
         }
     }, 30000);
 }
+
+// ============================================================
+// 初始化
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    if (adminToken) {
+        checkAuth();
+    }
+    setupLoginForm();
+    setupSidebar();
+    setupAutoRefresh();
+});
 </script>
 
 </body>

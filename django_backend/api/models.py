@@ -5,6 +5,118 @@
 from django.db import models
 
 
+class PlatformConfig(models.Model):
+    """
+    AI平台配置模型
+    存储百度云、腾讯云、Replicate等平台的API密钥配置
+    """
+    
+    # 平台类型
+    PLATFORM_CHOICES = [
+        ('baidu', '百度AI'),
+        ('tencent', '腾讯云'),
+        ('replicate', 'Replicate'),
+    ]
+    
+    platform = models.CharField(max_length=50, choices=PLATFORM_CHOICES, unique=True, verbose_name='平台')
+    
+    # API Key / App Key
+    api_key = models.CharField(max_length=255, blank=True, default='', verbose_name='API Key')
+    
+    # API Secret / Secret Key
+    api_secret = models.CharField(max_length=255, blank=True, default='', verbose_name='API Secret')
+    
+    # 其他配置（JSON格式存储）
+    extra_config = models.TextField(blank=True, default='{}', verbose_name='额外配置', help_text='JSON格式的额外配置')
+    
+    # 是否启用
+    is_enabled = models.BooleanField(default=True, verbose_name='是否启用')
+    
+    # 备注
+    remark = models.CharField(max_length=255, blank=True, default='', verbose_name='备注')
+    
+    # 创建和更新时间
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    
+    class Meta:
+        db_table = 'platform_config'
+        verbose_name = '平台配置'
+        verbose_name_plural = '平台配置列表'
+    
+    def to_dict(self):
+        """转换为字典"""
+        import json
+        return {
+            'id': str(self.id),
+            'platform': self.platform,
+            'platform_name': self.get_platform_display(),
+            'api_key': self.api_key,
+            'api_secret': self.api_secret,
+            'extra_config': json.loads(self.extra_config) if self.extra_config else {},
+            'is_enabled': self.is_enabled,
+            'remark': self.remark,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+        }
+    
+    def __str__(self):
+        return f"{self.get_platform_display()}配置"
+
+
+class SystemSettings(models.Model):
+    """
+    系统设置模型
+    存储系统级别的配置项
+    """
+    
+    # 设置键（唯一）
+    key = models.CharField(max_length=100, unique=True, verbose_name='设置键')
+    
+    # 设置值（JSON格式存储，支持各种类型）
+    value = models.TextField(verbose_name='设置值', help_text='JSON格式存储')
+    
+    # 描述
+    description = models.CharField(max_length=255, blank=True, default='', verbose_name='描述')
+    
+    # 更新时间
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    
+    class Meta:
+        db_table = 'system_settings'
+        verbose_name = '系统设置'
+        verbose_name_plural = '系统设置列表'
+    
+    @staticmethod
+    def get_setting(key, default=None):
+        """获取设置值"""
+        try:
+            import json
+            setting = SystemSettings.objects.get(key=key)
+            return json.loads(setting.value)
+        except SystemSettings.DoesNotExist:
+            return default
+        except Exception:
+            return default
+    
+    @staticmethod
+    def set_setting(key, value, description=''):
+        """设置值"""
+        import json
+        setting, created = SystemSettings.objects.get_or_create(
+            key=key,
+            defaults={'value': json.dumps(value), 'description': description}
+        )
+        if not created:
+            setting.value = json.dumps(value)
+            setting.description = description
+            setting.save()
+        return setting
+    
+    def __str__(self):
+        return f"{self.key} = {self.value[:50]}..."
+
+
 class RepairRecord(models.Model):
     """
     修复记录模型
